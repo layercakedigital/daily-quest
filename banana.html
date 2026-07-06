@@ -189,7 +189,7 @@
     <div class="reward">
       <div class="lbl">GRAND PRIZE</div>
       <div class="big">200 XP</div>
-      <div class="unlock">🎮 ALL-DAY TECH UNLOCKED!</div>
+      <div class="unlock" id="unlockmsg">🎮 ALL-DAY TECH UNLOCKED!</div>
     </div>
     <div class="cheer">
       <div class="tent">🍌</div>
@@ -214,16 +214,16 @@
 <script>
 (function(){
   var QUESTS = [
-    {e:"🪥", n:"Brush Your Teeth",   d:"Keep that smile legendary.",        xp:10},
-    {e:"🧹", n:"Brush Your Hair",    d:"Tame the mane!",                     xp:10},
-    {e:"🧴", n:"Put On Deodorant",   d:"Stay fresh. Be your best.",          xp:10},
-    {e:"👕", n:"Change Your Clothes", d:"New day, new vibes.",  xp:10, flag:"BONUS"},
-    {e:"📖", n:"Read For 30 Minutes", d:"Feed your mind. Level up.",         xp:25},
-    {e:"🛏️", n:"Make Your Bed",      d:"Small effort, big impact.",          xp:15},
-    {e:"🫧", n:"Do The Dishes",      d:"Be a hero. Leave no mess behind.",   xp:20},
-    {e:"🧺", n:"Fold Laundry",       d:"Tidy now, thank yourself later.", xp:15, flag:"IF AVAILABLE"},
-    {e:"🎹", n:"Piano Practice — 15 Min", d:"Practice makes progress. Keep the music alive!", xp:20},
-    {e:"🎨", n:"Be A Creator",       d:"Create and publish something today! Share your gift with the world.", xp:30}
+    {e:"🪥", n:"Brush Your Teeth",   d:"Keep that smile legendary.",        xp:5},
+    {e:"🧹", n:"Brush Your Hair",    d:"Tame the mane!",                     xp:5},
+    {e:"🧴", n:"Put On Deodorant",   d:"Stay fresh. Be your best.",          xp:5},
+    {e:"👕", n:"Change Your Clothes", d:"New day, new vibes.",  xp:5},
+    {e:"📖", n:"Read For 30 Minutes", d:"Feed your mind. Level up.",         xp:50},
+    {e:"🛏️", n:"Make Your Bed",      d:"Small effort, big impact.",          xp:10},
+    {e:"🫧", n:"Do The Dishes",      d:"Be a hero. Leave no mess behind.",   xp:25},
+    {e:"🧺", n:"Fold Laundry",       d:"Tidy now, thank yourself later.", xp:20, flag:"IF AVAILABLE"},
+    {e:"🎹", n:"Piano Practice — 15 Min", d:"Practice makes progress. Keep the music alive!", xp:30},
+    {e:"🎨", n:"Be A Creator",       d:"Create and publish something today! Share your gift with the world.", xp:45}
   ];
   var GOAL = QUESTS.reduce(function(s,q){return s+q.xp;},0);
   var KEY = "dailyQuest";
@@ -328,7 +328,7 @@
       var row = document.createElement('div');
       row.className = "quest"+(done?" done":"");
       row.innerHTML = '<div class="emoji">'+q.e+'</div>'+
-        '<div class="txt"><div class="name">'+q.n+(q.flag?' <span class="flag2">('+q.flag+')</span>':'')+'</div>'+
+        '<div class="txt"><div class="name">'+q.n+([0,1,2,3,5].indexOf(i)>=0?' <span style="font-size:9px;color:#fff;background:#d02a2a;padding:1px 5px;border-radius:6px;vertical-align:middle;letter-spacing:.4px;">REQUIRED</span>':'')+(q.flag?' <span class="flag2">('+q.flag+')</span>':'')+'</div>'+
         '<div class="desc">'+q.d+'</div></div>'+
         '<div class="xp">+'+q.xp+' XP</div><div class="box"></div>';
       row.addEventListener('click', function(){ toggle(i); });
@@ -381,6 +381,11 @@
     var doneCount = QUESTS.filter(function(q,i){return state.done[i];}).length;
     var idx = Math.min(CHEERS.length-1, doneCount); if(isComplete()) idx = CHEERS.length-1;
     document.getElementById('cheertxt').textContent = CHEERS[idx];
+    var ul=document.getElementById('unlockmsg');
+    if(ul){ if(isComplete()){ ul.innerHTML='🔓 ALL-DAY TECH UNLOCKED!'; ul.style.color=''; }
+      else { var rb=[0,1,2,3,5].filter(function(k){return !state.done[k];}).length;
+        ul.innerHTML = rb>0 ? '🔒 Required basics: '+rb+' left' : '🔒 Almost — finish all quests';
+        ul.style.color='#ffd7d7'; } }
   }
   function celebrate(r){
     var p = document.getElementById('winmsg');
