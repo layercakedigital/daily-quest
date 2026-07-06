@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#0a0e24">
-<title>Daily Quest — Virtual Stage</title>
+<title>Daily Quest — Neon Idol</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Baloo+2:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -166,6 +166,7 @@
 </style>
 </head>
 <body>
+<a href="./" style="position:fixed;top:14px;left:10px;z-index:200;background:#141a3a;color:#fff;border:2px solid #39c5bb;border-radius:20px;padding:5px 11px;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:13px;text-decoration:none;box-shadow:0 0 12px rgba(57,197,187,.4);">🏠 Worlds</a>
 <div class="bg">
   <div class="void"></div>
   <div class="stars"></div>
@@ -190,7 +191,7 @@
 
   <div class="titlewrap">
     <div class="title-plate"><h1>DAILY QUEST</h1></div>
-    <div><span class="subband"><span class="spark">♪</span> VIRTUAL STAGE <span class="spark">♪</span></span></div>
+    <div><span class="subband"><span class="spark">♪</span> NEON IDOL <span class="spark">♪</span></span></div>
   </div>
 
   <div class="intro">Complete your quests to unlock all-day tech! 💙</div>
@@ -528,12 +529,4 @@
   if(tn){ tn.addEventListener('click', function(){
     notify("Test Alert","ntfy is connected! You'll get a ping like this when the show is complete. 🎉","bell","high");
     alert("Test sent! Check your phone. If nothing arrives, make sure the ntfy app is subscribed to the exact topic and notifications are allowed.");
-  }); }
-
-  render();
-  setTimeout(function(){ hostSay("Welcome to the stage! 🎤"); }, 700);
-  if(state.broke){ save(); notify("Streak Reset","A day was missed — the daily-quest streak is back to 0. Might be worth a nudge! 💔","broken_heart","default"); }
-})();
-</script>
-</body>
-</html>
+ 
