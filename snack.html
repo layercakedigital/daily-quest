@@ -3,42 +3,41 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#ffcf3f">
-<title>Daily Quest — Snack Pals</title>
+<meta name="theme-color" content="#8fd0ff">
+<title>Daily Quest — Hot Dog &amp; Pals</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Baloo+2:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --mustard:#ffcf3f; --ketchup:#e03030; --bun:#e0a85a; --brown:#8a4a2a; --teal:#2ee6c9; --cream:#fff4d8;
-    --ink:#3a2410; --sub:#7a5a30;
-    --tile:#fff4d8; --tile-b:#d99a3a;
+    --mustard:#ffcf3f; --ketchup:#e03030; --bun:#e0a85a; --brown:#8a4a2a; --sky:#8fd0ff; --grass:#7ec850;
+    --ink:#2a3418; --sub:#5a6a3a;
+    --tile:#fffdf0; --tile-b:#d99a3a;
     --xp:#e03030; --green:#3ddc84; --greentxt:#bff5c0;
-    --panel:#7a3a1a; --panel2:#9a4e26;
+    --panel:#245a2a; --panel2:#2f7a36;
   }
   *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
   html,body{margin:0; padding:0; overflow-x:hidden;}
   body{font-family:'Baloo 2',system-ui,sans-serif; color:var(--ink); min-height:100vh; position:relative;
-    display:flex; justify-content:center; padding:14px 10px 70px; background:#ffcf3f;}
+    display:flex; justify-content:center; padding:14px 10px 70px; background:#8fd0ff;}
 
   .bg{position:fixed; inset:0; z-index:-1; overflow:hidden;}
-  .void{position:absolute; inset:0; background:linear-gradient(#ffd86a 0%, #ffb84a 55%, #ff8a3c 100%);}
-  .stripes{position:absolute; inset:0; opacity:.16; background:repeating-linear-gradient(90deg,#e03030 0 40px, transparent 40px 80px);}
-  .floor{position:absolute; left:-20%; right:-20%; bottom:0; height:30vh;
-    background-image:linear-gradient(45deg,rgba(224,48,48,.4) 25%,transparent 25%,transparent 75%,rgba(224,48,48,.4) 75%),linear-gradient(45deg,rgba(224,48,48,.4) 25%,transparent 25%,transparent 75%,rgba(224,48,48,.4) 75%);
-    background-size:52px 52px; background-position:0 0,26px 26px; transform:perspective(300px) rotateX(64deg); transform-origin:bottom center;
-    animation:floorscroll 6s linear infinite; opacity:.5;
-    -webkit-mask-image:linear-gradient(to top,#000 35%, transparent); mask-image:linear-gradient(to top,#000 35%, transparent);}
-  @keyframes floorscroll{from{background-position:0 0,26px 26px}to{background-position:0 52px,26px 78px}}
+  .void{position:absolute; inset:0; background:linear-gradient(#7ec4ff 0%, #b6e3ff 46%, #b6e88a 76%, #7ec850 100%);}
+  .cloud{position:absolute; width:60px; height:22px; background:#fff; border-radius:12px; opacity:.95; box-shadow:16px -8px 0 0 #fff, 32px -2px 0 0 #fff, -12px 2px 0 0 #fff;}
+  .cloud.c1{top:12%; animation:float1 38s linear infinite;}
+  .cloud.c2{top:26%; transform:scale(.7); animation:float2 50s linear infinite;}
+  @keyframes float1{from{left:-90px}to{left:110%}}
+  @keyframes float2{from{left:110%}to{left:-90px}}
+  .hills{position:absolute; left:0; right:0; bottom:0; height:130px;
+    background:radial-gradient(80px 80px at 16% 100%, #6fbf3a 60%, transparent 62%), radial-gradient(110px 110px at 50% 100%, #7ec850 60%, transparent 62%), radial-gradient(90px 90px at 84% 100%, #6fbf3a 60%, transparent 62%);}
+  .fence{position:absolute; left:0; right:0; bottom:44px; height:4px; background:repeating-linear-gradient(90deg,#c99a5a 0 18px, #a8814a 18px 20px); opacity:.7;}
 
   #balloons{position:fixed; inset:0; z-index:5; pointer-events:none; overflow:hidden;}
   .snack{position:absolute; bottom:-44px; font-size:26px; line-height:1; pointer-events:auto; cursor:pointer; will-change:transform; filter:drop-shadow(0 2px 2px rgba(0,0,0,.2));}
   .snack:active{transform:scale(.85);}
   @keyframes rise{to{transform:translateY(-118vh) rotate(var(--sway));}}
 
-  .bunting{position:fixed; top:0; left:0; right:0; height:10px; z-index:4; background:repeating-linear-gradient(90deg,#e03030 0 14px,#fff 14px 28px);}
-
-  .dragnote{text-align:center; margin:10px 6px 0; font-weight:800; font-size:12.5px; color:#fff; background:rgba(30,20,10,.5); border:1px dashed rgba(255,255,255,.5); border-radius:12px; padding:7px 12px;}
+  .bunting{position:fixed; top:0; left:0; right:0; height:10px; z-index:4; background:repeating-linear-gradient(90deg,#e03030 0 14px,#ffcf3f 14px 28px,#3a7ad6 28px 42px);}
 
   #troupe{position:fixed; inset:0; z-index:20; pointer-events:none;}
   .toon{position:fixed; width:56px; height:56px; pointer-events:auto; cursor:grab; touch-action:none; animation:bob 2.8s ease-in-out infinite; filter:drop-shadow(0 4px 4px rgba(0,0,0,.3));}
@@ -54,7 +53,7 @@
 
   .wrap{width:100%; max-width:520px; position:relative; z-index:6;}
   .stage{text-align:center; margin:16px 0 2px; position:relative;}
-  .mascot{width:98px; height:98px; cursor:pointer; display:inline-block; animation:bob 2.6s ease-in-out infinite; filter:drop-shadow(0 5px 5px rgba(0,0,0,.3));}
+  .mascot{width:104px; height:104px; cursor:pointer; display:inline-block; animation:bob 2.6s ease-in-out infinite; filter:drop-shadow(0 5px 5px rgba(0,0,0,.3));}
   .mascot:active{animation:none;}
   .mascot.pop{animation:pop .5s ease;}
   @keyframes pop{0%{transform:scale(1)}30%{transform:scale(1.18) rotate(-6deg)}60%{transform:scale(.94) rotate(5deg)}100%{transform:scale(1)}}
@@ -67,26 +66,26 @@
   .title-plate h1{margin:0; font-family:'Press Start 2P',cursive; font-size:22px; color:#fff; letter-spacing:1px; text-shadow:2px 2px 0 #7a1010;}
   .subband{display:inline-block; margin-top:8px; background:var(--brown); border:2px solid #fff; color:#fff; font-weight:800; letter-spacing:1px; padding:5px 16px; font-size:12px; border-radius:20px; box-shadow:0 3px 0 #5a2e12;}
   .subband .spark{color:var(--mustard);}
-  .intro{text-align:center; font-weight:800; color:#5a2e12; margin:12px 6px 4px; font-size:15px; text-shadow:0 1px 2px rgba(255,255,255,.4);}
+  .intro{text-align:center; font-weight:800; color:#1a4a6a; margin:12px 6px 4px; font-size:15px; text-shadow:0 1px 2px rgba(255,255,255,.5);}
 
-  .streak{display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap; margin:10px 4px 0; padding:9px 12px; text-align:center; background:linear-gradient(var(--panel2),var(--panel)); border:2px solid var(--mustard); border-radius:14px; color:#fff; font-weight:800; box-shadow:0 4px 0 #4a1e0a;}
+  .streak{display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap; margin:10px 4px 0; padding:9px 12px; text-align:center; background:linear-gradient(var(--panel2),var(--panel)); border:2px solid var(--mustard); border-radius:14px; color:#fff; font-weight:800; box-shadow:0 4px 0 #123a16;}
   .streak.broken{border-color:#ffcaca;}
   .streak .flame{font-size:22px; line-height:1;}
   .streak .num{font-family:'Press Start 2P',cursive; font-size:15px; color:var(--mustard);}
-  .streak .lbl{font-size:12.5px; color:#ffe0c0;}
-  .streak .bonus{font-size:12.5px; color:#bff5c0;}
+  .streak .lbl{font-size:12.5px; color:#d6ffd6;}
+  .streak .bonus{font-size:12.5px; color:#eaffcf;}
   .streak .best{font-size:12px; color:#fff;}
 
-  .scroll{background:linear-gradient(#fff7e4,#ffedc4); border:4px solid #fff; border-radius:18px; padding:14px 12px; margin-top:10px; box-shadow:0 0 0 4px var(--ketchup), 0 12px 22px rgba(0,0,0,.3);}
+  .scroll{background:linear-gradient(#fffdf0,#fff4d6); border:4px solid #fff; border-radius:18px; padding:14px 12px; margin-top:10px; box-shadow:0 0 0 4px var(--grass), 0 12px 22px rgba(0,0,0,.3);}
   .xpwrap{margin:2px 4px 12px;}
   .xprow{display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:5px;}
-  .xprow b{font-family:'Press Start 2P',cursive; font-size:12px; color:var(--ketchup);}
+  .xprow b{font-family:'Press Start 2P',cursive; font-size:12px; color:#2f7a36;}
   .xprow span{font-weight:800; color:var(--sub); font-size:14px;}
-  .xptrack{height:22px; background:#e7d3a8; border:3px solid #c99a48; border-radius:12px; overflow:hidden; box-shadow:inset 0 2px 4px rgba(0,0,0,.2);}
-  .xpfill{height:100%; width:0%; border-radius:9px; background:linear-gradient(90deg,#ffd21e,#e03030,#8a4a2a); background-size:200% 100%; animation:rainbow 4s linear infinite; transition:width .45s cubic-bezier(.3,1.2,.5,1);}
+  .xptrack{height:22px; background:#e0e3b8; border:3px solid #a8b060; border-radius:12px; overflow:hidden; box-shadow:inset 0 2px 4px rgba(0,0,0,.2);}
+  .xpfill{height:100%; width:0%; border-radius:9px; background:linear-gradient(90deg,#ffd21e,#e03030,#7ec850); background-size:200% 100%; animation:rainbow 4s linear infinite; transition:width .45s cubic-bezier(.3,1.2,.5,1);}
   @keyframes rainbow{to{background-position:200% 0}}
 
-  .quest{display:flex; align-items:center; gap:10px; background:linear-gradient(var(--tile),#ffe9b8); border:3px solid var(--tile-b); border-radius:12px; padding:9px 10px; margin:9px 2px; cursor:pointer; user-select:none; box-shadow:0 3px 0 rgba(0,0,0,.12); transition:transform .08s ease, opacity .2s;}
+  .quest{display:flex; align-items:center; gap:10px; background:linear-gradient(var(--tile),#fff2cc); border:3px solid var(--tile-b); border-radius:12px; padding:9px 10px; margin:9px 2px; cursor:pointer; user-select:none; box-shadow:0 3px 0 rgba(0,0,0,.12); transition:transform .08s ease, opacity .2s;}
   .quest:active{transform:scale(.98);}
   .quest .emoji{font-size:26px; width:38px; text-align:center; flex:none;}
   .quest .txt{flex:1; min-width:0;}
@@ -96,26 +95,25 @@
   .quest .xp{font-family:'Press Start 2P',cursive; font-size:11px; color:var(--xp); flex:none; white-space:nowrap;}
   .box{flex:none; width:30px; height:30px; border-radius:7px; border:3px solid var(--ketchup); background:#fff; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:20px; color:#fff; transition:.15s;}
   .quest.done{opacity:.76;}
-  .quest.done .name, .quest.done .desc{text-decoration:line-through; text-decoration-color:rgba(58,36,16,.5);}
+  .quest.done .name, .quest.done .desc{text-decoration:line-through; text-decoration-color:rgba(42,52,24,.5);}
   .quest.done .box{background:var(--green); border-color:#22a862; transform:scale(1.05);}
   .quest.done .box::after{content:"✓";}
 
   .footer{display:flex; gap:10px; align-items:stretch; margin:14px 4px 2px;}
-  .reward{flex:1; background:linear-gradient(var(--panel2),var(--panel)); border:2px solid var(--mustard); border-radius:12px; color:#fff; text-align:center; padding:10px 8px; box-shadow:0 4px 0 #4a1e0a;}
+  .reward{flex:1; background:linear-gradient(var(--panel2),var(--panel)); border:2px solid var(--mustard); border-radius:12px; color:#fff; text-align:center; padding:10px 8px; box-shadow:0 4px 0 #123a16;}
   .reward .lbl{font-family:'Press Start 2P',cursive; font-size:10px; color:var(--mustard); letter-spacing:.5px;}
   .reward .big{font-family:'Press Start 2P',cursive; font-size:16px; color:#fff; margin:8px 0 4px;}
   .reward .unlock{font-weight:800; font-size:12px; color:#bff5c0;}
   .cheer{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; background:#fff; border:2px solid var(--ketchup); border-radius:12px; text-align:center; padding:10px; font-weight:800; color:var(--ink); font-size:14px;}
   .cheer .tent{font-size:32px; line-height:1;}
 
-  .hint{text-align:center; color:#5a2e12; font-size:12px; margin:14px 6px 0; font-weight:700;}
-  .reset{display:block; margin:10px auto 0; background:none; border:none; color:#5a2e12; font-weight:800; font-size:13px; opacity:.85; text-decoration:underline; cursor:pointer;}
+  .reset{display:block; margin:12px auto 0; background:none; border:none; color:#1a4a6a; font-weight:800; font-size:13px; opacity:.85; text-decoration:underline; cursor:pointer;}
 
   .soundbtn{position:fixed; top:14px; right:10px; z-index:100; background:var(--brown); color:#fff; border:2px solid #fff; border-radius:20px; padding:6px 12px; font-family:'Baloo 2'; font-weight:800; font-size:13px; cursor:pointer; box-shadow:0 3px 0 #5a2e12;}
 
-  .overlay{position:fixed; inset:0; background:rgba(60,30,10,.82); display:none; align-items:center; justify-content:center; z-index:80; padding:24px; text-align:center;}
+  .overlay{position:fixed; inset:0; background:rgba(20,40,60,.82); display:none; align-items:center; justify-content:center; z-index:80; padding:24px; text-align:center;}
   .overlay.show{display:flex;}
-  .winbox{background:linear-gradient(#fff7e4,#ffe9b8); border:5px solid var(--ketchup); border-radius:20px; padding:24px 22px; max-width:360px; box-shadow:0 0 40px rgba(255,207,63,.7);}
+  .winbox{background:linear-gradient(#fffdf0,#fff2cc); border:5px solid var(--ketchup); border-radius:20px; padding:24px 22px; max-width:360px; box-shadow:0 0 40px rgba(255,207,63,.7);}
   .winbox .d{font-size:56px;}
   .winbox h2{font-family:'Press Start 2P',cursive; font-size:15px; color:var(--ketchup); margin:8px 0; text-shadow:2px 2px 0 #ffd980;}
   .winbox p{font-weight:800; color:var(--sub); font-size:15px; margin:6px 0 16px;}
@@ -128,8 +126,10 @@
 <a href="./" style="position:fixed;top:14px;left:10px;z-index:200;background:#8a4a2a;color:#fff;border:2px solid #fff;border-radius:20px;padding:5px 11px;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:13px;text-decoration:none;box-shadow:0 3px 0 #5a2e12;">🏠 Worlds</a>
 <div class="bg">
   <div class="void"></div>
-  <div class="stripes"></div>
-  <div class="floor"></div>
+  <div class="cloud c1"></div>
+  <div class="cloud c2"></div>
+  <div class="hills"></div>
+  <div class="fence"></div>
 </div>
 <div class="bunting"></div>
 <div id="balloons"></div>
@@ -139,17 +139,17 @@
 
 <div class="wrap">
   <div class="stage">
-    <svg class="mascot" id="mascot" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-label="pal"></svg>
+    <svg class="mascot" id="mascot" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-label="hot dog"></svg>
     <div class="bubble" id="bubble"></div>
   </div>
 
   <div class="titlewrap">
     <div class="title-plate"><h1>DAILY QUEST</h1></div>
-    <div><span class="subband"><span class="spark">🌭</span> SNACK PALS <span class="spark">🌭</span></span></div>
+    <div><span class="subband"><span class="spark">🌭</span> HOT DOG &amp; PALS <span class="spark">🌭</span></span></div>
   </div>
 
   <div class="intro">Complete your quests to unlock all-day tech! 🌭</div>
-  <div class="dragnote">👆 Tap the snack pals to chat — press &amp; hold to drag them anywhere!</div>
+  <div style="text-align:center;margin:10px 6px 0;font-weight:800;font-size:12.5px;color:#fff;background:rgba(20,16,10,.5);border:1px dashed rgba(255,255,255,.55);border-radius:12px;padding:7px 12px;">👆 Tap the gang to chat — press &amp; hold to drag them anywhere!</div>
 
   <div class="streak" id="streak"></div>
 
@@ -168,8 +168,8 @@
       <div class="unlock" id="unlockmsg">🎮 ALL-DAY TECH UNLOCKED!</div>
     </div>
     <div class="cheer">
-      <div class="tent">🍔</div>
-      <div id="cheertxt">The snack squad's hungry for wins!</div>
+      <div class="tent">🌭</div>
+      <div id="cheertxt">You + the gang = unstoppable!</div>
     </div>
   </div>
 
@@ -180,8 +180,8 @@
 <div class="overlay" id="overlay">
   <div class="winbox">
     <div class="d">🌭🎉</div>
-    <h2>YUMMY! ALL DONE!</h2>
-    <p id="winmsg">200 XP earned — All-Day Tech Unlocked! The snack squad is proud. 🌭</p>
+    <h2>BEST DAY EVER!</h2>
+    <p id="winmsg">200 XP earned — All-Day Tech Unlocked! You and the gang did it. 🌭</p>
     <button class="go" id="closewin">🎮 Let's Play!</button>
   </div>
 </div>
@@ -202,9 +202,9 @@
   ];
   var GOAL = QUESTS.reduce(function(s,q){return s+q.xp;},0);
   var KEY = "dailyQuest";
-  var CHEERS = ["The snack squad's hungry for wins!","Warming up the grill… 🔥","Tasty progress! 🍟","Everyone's cheering! 🎉","One more bite to go! 🍔","YUMMY! ALL DONE! 🎊"];
-  var MOTIVATE = ["Delicious work! 🍔","Nom nom, nice! 🌭","You're on a roll! 🥖","So tasty! 🍟","Sweet! Keep going! 🍩","High five! ✋","Chef's kiss! 😙","Yum! 🎈","Extra sprinkles for you! 🍩","Best snack buddy ever! 💛"];
-  var GREET = ["Hiya, buddy! 👋","Want a snack? 🍟","Let's have fun! 🎉","Ketchup or mustard? 🌭","I'm your #1 pal!","Drag me around! ✨","Tee-hee! 😄","Snack break later? 🍔","Boop! 🍩","You + me = yum! 💛"];
+  var CHEERS = ["You + the gang = unstoppable!","Rallying the crew… 🙌","Best day's looking up! 🌭","Everyone's cheering! 🎉","One more to go — you got this! ⭐","BEST DAY EVER! 🎊"];
+  var MOTIVATE = ["Awesome-sauce! 🌭","The gang's so proud! 🙌","You're a superstar! ⭐","Way to go, buddy! 💪","So cool! Keep going! 😎","High five! ✋","Best. Move. Ever! 🎉","Woohoo! 🎈","Totally rad! 🤙","You're the best! 💛"];
+  var GREET = ["Hey buddy! 👋","Best day ever, right? 🌭","Wanna hang out? 😎","You've got this! 💪","We're all rooting for ya!","Drag me around! ✨","Ha, this is fun! 😄","Snack run later? 🍟","Boop! 🐾","Squad goals! 🙌"];
 
   function pad(n){ return (n<10?'0':'')+n; }
   function ymd(d){ return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
@@ -215,10 +215,10 @@
 
   function streakBonus(s){ return s>0 ? s*10 : 0; }
   function milestoneFor(s){
-    if(s===3)  return "🔥 3-Day Streak — Snack Rookie!";
-    if(s===7)  return "🏅 7-Day Streak — Head Chef!";
-    if(s===14) return "⚡ 14-Day Streak — Flavor Master!";
-    if(s===30) return "👑 30-Day Streak — Snack Legend!";
+    if(s===3)  return "🔥 3-Day Streak — New Best Bud!";
+    if(s===7)  return "🏅 7-Day Streak — Squad Captain!";
+    if(s===14) return "⚡ 14-Day Streak — Neighborhood Hero!";
+    if(s===30) return "👑 30-Day Streak — Legend of the Block!";
     if(s>30 && s%10===0) return "🌟 "+s+"-Day Streak — Legendary!";
     return "";
   }
@@ -324,7 +324,7 @@
         var msg = "Finished all daily quests! 🎉";
         if(state.streak>0) msg += " "+state.streak+"-day streak (+"+streakBonus(state.streak)+" bonus XP).";
         var ms = milestoneFor(state.streak); if(ms) msg += " "+ms;
-        notify("Yummy! Quests Complete", msg, "tada,hotdog", "high");
+        notify("Best Day! Quests Complete", msg, "tada,hotdog", "high");
       }
     }
   }
@@ -358,7 +358,7 @@
       var line = '200 XP earned — All-Day Tech Unlocked!';
       if(r.streak>0) line += ' 🔥 '+r.streak+'-day streak (+'+r.bonus+' bonus XP).';
       if(r.ms) line += ' '+r.ms;
-      line += ' The snack squad is proud. 🌭'; p.textContent = line;
+      line += ' You and the gang did it. 🌭'; p.textContent = line;
     }
     document.getElementById('overlay').classList.add('show');
     allToonsCheer();
@@ -366,7 +366,7 @@
   }
   function confetti(x,y){
     var c = document.createElement('div'); c.className='confetti';
-    var colors=['#ffcf3f','#e03030','#8a4a2a','#2ee6c9','#6fbf3a','#ff9ec7'];
+    var colors=['#ffcf3f','#e03030','#8a4a2a','#3a7ad6','#7ec850','#ff9ec7'];
     c.style.background=colors[Math.floor(Math.random()*colors.length)];
     c.style.left=x+'px'; c.style.top=y+'px';
     var dur=2.4+Math.random()*2, dx=(Math.random()*200-100);
@@ -377,7 +377,7 @@
   }
 
   var noteLayer=document.getElementById('balloons');
-  var GLYPHS=['🌭','🍔','🍟','🍩','🥤','🌮'];
+  var GLYPHS=['🌭','🍔','🍟','🥤','🌮','⚽'];
   function spawnSnack(){
     if(document.hidden || noteLayer.children.length>4) return;
     var b=document.createElement('div'); b.className='snack'; b.textContent=rand(GLYPHS);
@@ -391,38 +391,44 @@
   }
   setInterval(spawnSnack, 2600); setTimeout(spawnSnack, 900);
 
-  var HOTDOG = '<rect x="2" y="3" width="12" height="1" fill="#f0c078"/><rect x="2" y="4" width="12" height="2" fill="#c0442a"/>'+
-    '<rect x="1" y="4" width="1" height="2" fill="#a83420"/><rect x="14" y="4" width="1" height="2" fill="#a83420"/>'+
-    '<rect x="2" y="6" width="12" height="2" fill="#e0a85a"/>'+
-    '<rect x="3" y="4" width="1" height="1" fill="#ffd21e"/><rect x="6" y="5" width="1" height="1" fill="#ffd21e"/><rect x="9" y="4" width="1" height="1" fill="#ffd21e"/><rect x="12" y="5" width="1" height="1" fill="#ffd21e"/>'+
-    '<rect x="5" y="4" width="1" height="1" fill="#3a1810"/><rect x="10" y="4" width="1" height="1" fill="#3a1810"/><rect x="7" y="5" width="2" height="1" fill="#7a2010"/>'+
-    '<rect x="0" y="8" width="2" height="1" fill="#c0442a"/><rect x="14" y="8" width="2" height="1" fill="#c0442a"/>'+
-    '<rect x="0" y="9" width="1" height="1" fill="#fff"/><rect x="15" y="9" width="1" height="1" fill="#fff"/>'+
-    '<rect x="5" y="8" width="1" height="4" fill="#c0442a"/><rect x="10" y="8" width="1" height="4" fill="#c0442a"/>'+
-    '<rect x="4" y="12" width="3" height="2" fill="#4d8cff"/><rect x="9" y="12" width="3" height="2" fill="#4d8cff"/><rect x="4" y="13" width="3" height="1" fill="#fff"/><rect x="9" y="13" width="3" height="1" fill="#fff"/>';
-  var BURGER = '<rect x="3" y="2" width="10" height="1" fill="#f0c078"/><rect x="2" y="3" width="12" height="2" fill="#f0c078"/>'+
-    '<rect x="5" y="3" width="1" height="1" fill="#fff5d0"/><rect x="9" y="3" width="1" height="1" fill="#fff5d0"/>'+
-    '<rect x="2" y="5" width="12" height="1" fill="#6fbf3a"/><rect x="2" y="6" width="12" height="2" fill="#8a4a2a"/>'+
-    '<rect x="2" y="8" width="12" height="1" fill="#ffb020"/><rect x="3" y="9" width="2" height="1" fill="#ffb020"/><rect x="11" y="9" width="2" height="1" fill="#ffb020"/>'+
-    '<rect x="2" y="9" width="12" height="2" fill="#e0a85a"/>'+
-    '<rect x="5" y="6" width="1" height="1" fill="#2a1008"/><rect x="10" y="6" width="1" height="1" fill="#2a1008"/><rect x="7" y="7" width="2" height="1" fill="#2a1008"/>'+
-    '<rect x="4" y="11" width="2" height="2" fill="#3a2a1a"/><rect x="10" y="11" width="2" height="2" fill="#3a2a1a"/>';
-  var FRIES = '<rect x="4" y="2" width="2" height="7" fill="#ffd21e"/><rect x="7" y="1" width="2" height="8" fill="#ffcf3f"/><rect x="10" y="3" width="2" height="6" fill="#ffd21e"/>'+
-    '<rect x="3" y="8" width="10" height="6" fill="#e03030"/><rect x="4" y="8" width="8" height="1" fill="#fff"/>'+
-    '<rect x="5" y="10" width="2" height="2" fill="#fff"/><rect x="9" y="10" width="2" height="2" fill="#fff"/><rect x="6" y="11" width="1" height="1" fill="#2a1008"/><rect x="9" y="11" width="1" height="1" fill="#2a1008"/><rect x="7" y="12" width="2" height="1" fill="#7a2010"/>';
-  var DONUT = '<rect x="4" y="4" width="8" height="8" fill="#d9a05a"/><rect x="3" y="5" width="10" height="6" fill="#d9a05a"/>'+
-    '<rect x="3" y="4" width="10" height="3" fill="#ff9ec7"/><rect x="4" y="3" width="8" height="1" fill="#ff9ec7"/>'+
-    '<rect x="5" y="4" width="1" height="1" fill="#ffd21e"/><rect x="8" y="5" width="1" height="1" fill="#6fbf3a"/><rect x="10" y="4" width="1" height="1" fill="#4d8cff"/>'+
-    '<rect x="6" y="7" width="4" height="3" fill="#2a1a10"/>'+
-    '<rect x="4" y="8" width="1" height="1" fill="#2a1008"/><rect x="11" y="8" width="1" height="1" fill="#2a1008"/>'+
-    '<rect x="4" y="12" width="2" height="2" fill="#3a2a1a"/><rect x="10" y="12" width="2" height="2" fill="#3a2a1a"/>';
-  var SODA = '<rect x="3" y="3" width="10" height="1" fill="#e03030"/><rect x="4" y="4" width="8" height="10" fill="#2ee6c9"/><rect x="4" y="4" width="8" height="1" fill="#c7fff5"/>'+
-    '<rect x="9" y="0" width="1" height="4" fill="#ff5a7a"/>'+
-    '<rect x="6" y="7" width="1" height="2" fill="#2a1008"/><rect x="9" y="7" width="1" height="2" fill="#2a1008"/><rect x="7" y="10" width="2" height="1" fill="#2a1008"/>'+
-    '<rect x="4" y="14" width="2" height="1" fill="#3a2a1a"/><rect x="10" y="14" width="2" height="1" fill="#3a2a1a"/>';
+  /* ===== The hot dog star + his crew (all original) ===== */
+  var HOTDOG = '<rect x="4" y="1" width="8" height="1" fill="#e8623c"/><rect x="3" y="2" width="10" height="4" fill="#d94a30"/>'+
+    '<rect x="2" y="3" width="1" height="2" fill="#b83a20"/><rect x="13" y="3" width="1" height="2" fill="#b83a20"/>'+
+    '<rect x="4" y="2" width="1" height="1" fill="#ffd21e"/><rect x="8" y="2" width="1" height="1" fill="#ffd21e"/><rect x="11" y="2" width="1" height="1" fill="#ffd21e"/>'+
+    '<rect x="5" y="3" width="2" height="2" fill="#fff"/><rect x="9" y="3" width="2" height="2" fill="#fff"/><rect x="5" y="4" width="1" height="1" fill="#2a1008"/><rect x="9" y="4" width="1" height="1" fill="#2a1008"/>'+
+    '<rect x="6" y="6" width="4" height="1" fill="#fff"/><rect x="6" y="6" width="4" height="1" fill="#7a2010"/>'+
+    '<rect x="3" y="7" width="10" height="3" fill="#e8a858"/><rect x="3" y="7" width="10" height="1" fill="#f0c078"/>'+
+    '<rect x="1" y="7" width="2" height="1" fill="#d94a30"/><rect x="13" y="7" width="2" height="1" fill="#d94a30"/>'+
+    '<rect x="0" y="8" width="2" height="2" fill="#fff"/><rect x="14" y="8" width="2" height="2" fill="#fff"/>'+
+    '<rect x="5" y="10" width="2" height="3" fill="#d94a30"/><rect x="9" y="10" width="2" height="3" fill="#d94a30"/>'+
+    '<rect x="3" y="13" width="4" height="2" fill="#3a7ad6"/><rect x="9" y="13" width="4" height="2" fill="#3a7ad6"/><rect x="3" y="14" width="4" height="1" fill="#fff"/><rect x="9" y="14" width="4" height="1" fill="#fff"/>';
+  var BOY = '<rect x="4" y="1" width="8" height="2" fill="#6a4020"/><rect x="4" y="1" width="1" height="3" fill="#6a4020"/><rect x="11" y="1" width="1" height="3" fill="#6a4020"/>'+
+    '<rect x="4" y="3" width="8" height="4" fill="#f2c79a"/>'+
+    '<rect x="6" y="4" width="1" height="2" fill="#2a1810"/><rect x="9" y="4" width="1" height="2" fill="#2a1810"/><rect x="6" y="6" width="4" height="1" fill="#c07850"/>'+
+    '<rect x="4" y="7" width="8" height="4" fill="#3ea84e"/><rect x="3" y="8" width="1" height="3" fill="#f2c79a"/><rect x="12" y="8" width="1" height="3" fill="#f2c79a"/>'+
+    '<rect x="4" y="11" width="8" height="2" fill="#8a5a2a"/><rect x="7" y="11" width="1" height="2" fill="#6a4020"/>'+
+    '<rect x="5" y="13" width="2" height="1" fill="#f2c79a"/><rect x="9" y="13" width="2" height="1" fill="#f2c79a"/><rect x="4" y="14" width="3" height="1" fill="#fff"/><rect x="9" y="14" width="3" height="1" fill="#fff"/>';
+  var GIRL = '<rect x="4" y="1" width="8" height="2" fill="#d96a2a"/><rect x="3" y="2" width="1" height="6" fill="#d96a2a"/><rect x="12" y="2" width="1" height="6" fill="#d96a2a"/>'+
+    '<rect x="4" y="3" width="8" height="4" fill="#f7d0a8"/>'+
+    '<rect x="6" y="4" width="1" height="2" fill="#2a1810"/><rect x="9" y="4" width="1" height="2" fill="#2a1810"/><rect x="6" y="6" width="4" height="1" fill="#c06858"/>'+
+    '<rect x="4" y="7" width="8" height="3" fill="#2ec8b0"/><rect x="4" y="10" width="8" height="2" fill="#a05ad0"/>'+
+    '<rect x="3" y="8" width="1" height="3" fill="#f7d0a8"/><rect x="12" y="8" width="1" height="3" fill="#f7d0a8"/>'+
+    '<rect x="5" y="12" width="2" height="2" fill="#f7d0a8"/><rect x="9" y="12" width="2" height="2" fill="#f7d0a8"/><rect x="5" y="14" width="2" height="1" fill="#e03030"/><rect x="9" y="14" width="2" height="1" fill="#e03030"/>';
+  var KID = '<rect x="4" y="1" width="8" height="2" fill="#ffcf3f"/><rect x="11" y="2" width="3" height="1" fill="#e0a820"/>'+
+    '<rect x="4" y="3" width="8" height="4" fill="#c98a5a"/>'+
+    '<rect x="5" y="4" width="6" height="1" fill="#2a1810"/><rect x="5" y="4" width="1" height="1" fill="#fff"/><rect x="10" y="4" width="1" height="1" fill="#fff"/><rect x="6" y="6" width="4" height="1" fill="#8a5a3a"/>'+
+    '<rect x="4" y="7" width="8" height="4" fill="#e03030"/><rect x="3" y="8" width="1" height="3" fill="#c98a5a"/><rect x="12" y="8" width="1" height="3" fill="#c98a5a"/>'+
+    '<rect x="4" y="11" width="8" height="2" fill="#3a5a8a"/>'+
+    '<rect x="5" y="13" width="2" height="2" fill="#2a2a2a"/><rect x="9" y="13" width="2" height="2" fill="#2a2a2a"/>';
+  var PUP = '<rect x="3" y="4" width="2" height="3" fill="#8a5a2a"/><rect x="11" y="4" width="2" height="3" fill="#8a5a2a"/>'+
+    '<rect x="4" y="4" width="8" height="5" fill="#c99a5a"/><rect x="6" y="7" width="4" height="2" fill="#f0d8b8"/>'+
+    '<rect x="6" y="5" width="1" height="2" fill="#2a1810"/><rect x="9" y="5" width="1" height="2" fill="#2a1810"/><rect x="7" y="7" width="2" height="1" fill="#2a1810"/>'+
+    '<rect x="4" y="9" width="8" height="4" fill="#c99a5a"/><rect x="4" y="9" width="8" height="1" fill="#e03030"/>'+
+    '<rect x="12" y="9" width="2" height="1" fill="#c99a5a"/><rect x="13" y="8" width="1" height="1" fill="#c99a5a"/>'+
+    '<rect x="4" y="13" width="2" height="2" fill="#c99a5a"/><rect x="10" y="13" width="2" height="2" fill="#c99a5a"/>';
   document.getElementById('mascot').innerHTML = HOTDOG;
 
-  var TROUPE = [ { id:'sn1', svg:BURGER }, { id:'sn2', svg:FRIES }, { id:'sn3', svg:DONUT }, { id:'sn4', svg:SODA } ];
+  var TROUPE = [ { id:'sn1', svg:BOY }, { id:'sn2', svg:GIRL }, { id:'sn3', svg:KID }, { id:'sn4', svg:PUP } ];
   var DEFAULT_POS = { sn1:{l:'4vw',t:'28vh'}, sn2:{l:'86vw',t:'22vh'}, sn3:{l:'5vw',t:'62vh'}, sn4:{l:'85vw',t:'56vh'} };
   var savedPos = {}; try{ savedPos = JSON.parse(localStorage.getItem('dq_snack')||'{}'); }catch(e){ savedPos={}; }
   var troupeEl = document.getElementById('troupe');
@@ -462,7 +468,7 @@
     for(var i=0;i<kids.length;i++){ (function(el,d){ setTimeout(function(){ hopToon(el); toonSay(el, rand(MOTIVATE)); }, d*140); })(kids[i], i); } }
 
   var mascot=document.getElementById('mascot'), bubble=document.getElementById('bubble'), bTimer=null;
-  var HOST=["Hiya, buddy! 👋","Ready to chow down on quests? 🌭","Let's-a snack... let's go! 🍔","You're the best! 💛","Relish the day! 😄","Ketchup with your goals! 🍟","Bun-believable! 🌭"];
+  var HOST=["Hey, best buddy! 👋","Today's gonna be AWESOME! 🌭","Me and the gang believe in you! 🙌","You're gonna crush it! 💪","Best day ever, let's go! 😎","Relish every moment! 🌭","We got this — together! ⭐"];
   function hostSay(txt){ bubble.textContent=txt; bubble.classList.add('show');
     mascot.classList.remove('pop'); void mascot.offsetWidth; mascot.classList.add('pop');
     clearTimeout(bTimer); bTimer=setTimeout(function(){ bubble.classList.remove('show'); },2600); }
@@ -481,7 +487,7 @@
   }); }
 
   render();
-  setTimeout(function(){ hostSay("Hiya! Ready to chow down on quests? 🌭"); }, 700);
+  setTimeout(function(){ hostSay("Hey buddy! Today's gonna be AWESOME! 🌭"); }, 700);
   if(state.broke){ save(); notify("Streak Reset","A day was missed — the daily-quest streak is back to 0. Might be worth a nudge! 💔","broken_heart","default"); }
 })();
 </script>
